@@ -569,9 +569,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
       cursor: grab;
     }
 
@@ -580,6 +578,9 @@
     }
 
     .zoom-viewport img {
+      position: absolute;
+      top: 0;
+      left: 0;
       max-width: none;
       max-height: none;
       transform-origin: 0 0;
