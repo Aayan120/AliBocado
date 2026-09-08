@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bocado — Your New Favorite Bite</title>
+  <meta name="description"
+    content="Bocado Restaurant — Discover our delicious burgers, pasta, salads and more. View our menu in English and Arabic." />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+      background: #0a1628;
+      color: #e0f0ff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== ANIMATED OCEAN BACKGROUND ===== */
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background: linear-gradient(160deg, #0a1628 0%, #0d2137 30%, #0f2b45 50%, #0a2a3f 70%, #071520 100%);
+    }
+
+    .bg-pattern::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(0, 210, 255, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(0, 150, 200, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 10%, rgba(0, 180, 220, 0.04) 0%, transparent 60%),
+        radial-gradient(circle at 70% 40%, rgba(20, 230, 200, 0.03) 0%, transparent 40%);
+      animation: bgFloat 25s ease-in-out infinite;
+    }
+
+    .bg-pattern::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 120%;
+      height: 60%;
+      background:
+        radial-gradient(ellipse at 30% 80%, rgba(0, 200, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(0, 180, 180, 0.04) 0%, transparent 50%);
+      animation: bgFloat 18s ease-in-out infinite reverse;
+    }
+
+    @keyframes bgFloat {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      25% {
+        transform: translate(1.5%, -1.5%) rotate(0.5deg);
+      }
+
+      50% {
+        transform: translate(-1%, 2%) rotate(-0.3deg);
+      }
+
+      75% {
+        transform: translate(2%, -0.5%) rotate(0.8deg);
+      }
+    }
+
+    /* ===== FLOATING ORBS ===== */
+    .bg-pattern .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.4;
+    }
+
+    /* ===== MAIN CONTAINER ===== */
+    .main-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0 16px;
+    }
+
+    /* ===== HEADER / LOGO ===== */
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 32px 0 8px;
+      animation: fadeSlideDown 0.8s ease-out;
+    }
+
+    @keyframes fadeSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-wrapper::before {
+      content: '';
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.12) 0%, rgba(0, 150, 200, 0.05) 40%, transparent 70%);
+      animation: logoPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes logoPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scale(1.15);
+        opacity: 0.9;
+      }
+    }
+
+    .logo-img {
+      width: 220px;
+      max-width: 60vw;
+      height: auto;
+      filter: drop-shadow(0 4px 30px rgba(0, 200, 255, 0.25)) brightness(1.05);
+      transition: transform 0.4s ease, filter 0.4s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 6px 40px rgba(0, 200, 255, 0.4)) brightness(1.1);
+    }
+
+    /* ===== TAGLINE ===== */
+    .tagline {
+      text-align: center;
+      padding: 4px 0 24px;
+      animation: fadeSlideDown 1s ease-out 0.2s both;
+    }
+
+    .tagline h1 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #7ec8e3;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      text-align: center;
+      margin-bottom: 20px;
+      animation: fadeSlideDown 1s ease-out 0.4s both;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e0f0ff;
+      position: relative;
+      display: inline-block;
+      text-shadow: 0 0 20px rgba(0, 200, 255, 0.15);
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 3px;
+      background: linear-gradient(90deg, #00c8ff, #00e6c8);
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(0, 200, 255, 0.4);
+    }
+
+    /* ===== CAROUSEL ===== */
+    .carousel-section {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      animation: fadeSlideUp 1s ease-out 0.5s both;
+    }
+
+    .carousel-dots {
+      width: 100%;
+      max-width: 700px;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .carousel-container {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+      max-width: 560px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(10, 30, 50, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 200, 255, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 200, 255, 0.15);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Language Label */
+    .lang-label {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 30, 60, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #7ec8e3;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid rgba(0, 200, 255, 0.25);
+      z-index: 3;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Carousel Arrows */
+    .carousel-arrow {
+      position: sticky;
+      top: 50vh;
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(10, 30, 60, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 200, 255, 0.25);
+      color: #7ec8e3;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      margin: 0 6px;
+      align-self: flex-start;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0, 200, 255, 0.2);
+      color: #fff;
+      border-color: rgba(0, 200, 255, 0.5);
+      transform: scale(1.1);
+      box-shadow: 0 4px 24px rgba(0, 200, 255, 0.3);
+    }
+
+    /* Dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 0;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(126, 200, 227, 0.2);
+      border: 1px solid rgba(0, 200, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: #00c8ff;
+      transform: scale(1.3);
+      box-shadow: 0 0 14px rgba(0, 200, 255, 0.6);
+      border-color: transparent;
+    }
+
+    /* ===== CTA BUTTONS ===== */
+    .cta-section {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      gap: 16px;
+      margin: 28px auto 0;
+      animation: fadeSlideUp 1s ease-out 0.7s both;
+    }
+
+    .cta-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .cta-btn:hover::before {
+      left: 100%;
+    }
+
+    /* Location Button */
+    .btn-location {
+      background: linear-gradient(135deg, #0d3b66, #145374, #0d6e8a);
+      color: #e0f0ff;
+      box-shadow:
+        0 4px 20px rgba(0, 110, 138, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(0, 200, 255, 0.15);
+    }
+
+    .btn-location:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 8px 32px rgba(0, 200, 255, 0.3),
+        0 0 20px rgba(0, 200, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(0, 200, 255, 0.3);
+    }
+
+    /* WhatsApp Button */
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #0d4a2e, #128c4e, #15a355);
+      color: #e0ffe8;
+      box-shadow:
+        0 4px 20px rgba(18, 140, 78, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(37, 211, 102, 0.2);
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 8px 32px rgba(37, 211, 102, 0.35),
+        0 0 20px rgba(37, 211, 102, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: rgba(37, 211, 102, 0.35);
+    }
+
+    .cta-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      width: 100%;
+      text-align: center;
+      padding: 32px 16px 20px;
+      margin-top: auto;
+      animation: fadeSlideUp 1s ease-out 0.9s both;
+    }
+
+    .footer-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.4), transparent);
+      margin: 0 auto 14px;
+      border-radius: 1px;
+    }
+
+    .footer p {
+      font-size: 0.8rem;
+      color: #7ec8e3;
+      opacity: 0.45;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== SWIPE TOUCH SUPPORT ===== */
+    .carousel-container {
+      touch-action: pan-y;
+    }
+
+    /* ===== ZOOM VIEWER OVERLAY ===== */
+    .zoom-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(5, 12, 24, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .zoom-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .zoom-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(0, 200, 255, 0.12);
+      border: 1px solid rgba(0, 200, 255, 0.3);
+      color: #7ec8e3;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .zoom-close-btn:hover {
+      background: rgba(0, 200, 255, 0.25);
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 30, 60, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #7ec8e3;
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(0, 200, 255, 0.2);
+      opacity: 1;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .zoom-hint.hidden {
+      opacity: 0;
+    }
+
+    .zoom-viewport {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+
+    .zoom-viewport:active {
+      cursor: grabbing;
+    }
+
+    .zoom-viewport img {
+      max-width: none;
+      max-height: none;
+      transform-origin: 0 0;
+      transition: none;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .zoom-viewport img.smooth-transition {
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Zoom level indicator */
+    .zoom-level {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 30, 60, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #00c8ff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border: 1px solid rgba(0, 200, 255, 0.25);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .zoom-level.visible {
+      opacity: 1;
+    }
+
+    /* Make menu images tappable */
+    .carousel-slide img {
+      cursor: zoom-in;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .header {
+        padding: 24px 0 4px;
+      }
+
+      .logo-img {
+        width: 180px;
+      }
+
+      .logo-wrapper::before {
+        width: 220px;
+        height: 220px;
+      }
+
+      .tagline h1 {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+      }
+
+      .section-title h2 {
+        font-size: 1.6rem;
+      }
+
+      .carousel-container {
+        border-radius: 16px;
+      }
+
+      .carousel-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+
+      .cta-section {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .cta-btn {
+        padding: 15px 18px;
+        border-radius: 14px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .logo-img {
+        width: 150px;
+      }
+
+      .section-title h2 {
+        font-size: 1.3rem;
+      }
+
+      .cta-btn {
+        padding: 13px 14px;
+        font-size: 0.85rem;
+        gap: 8px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .logo-img {
+        width: 250px;
+      }
+
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+
+      .carousel-container {
+        border-radius: 24px;
+      }
+
+      .cta-btn {
+        padding: 18px 28px;
+        font-size: 1.05rem;
+        border-radius: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-pattern"></div>
+
+  <div class="main-container">
+
+    <!-- Header / Logo -->
+    <header class="header" id="header">
+      <div class="logo-wrapper">
+        <img src="assets/logo.png" alt="Bocado Restaurant Logo" class="logo-img" />
+      </div>
+    </header>
+
+    <!-- Tagline -->
+    <div class="tagline">
+      <h1>Your New Favorite Bite</h1>
+    </div>
+
+    <!-- Section Title -->
+    <div class="section-title">
+      <h2>Our Menu · قائمة الطعام</h2>
+    </div>
+
+    <!-- Carousel -->
+    <section class="carousel-section" id="menu">
+      <!-- Prev Arrow -->
+      <button class="carousel-arrow prev" id="prevBtn" aria-label="Previous slide">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="carousel-container" id="carouselContainer">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- English Menu -->
+          <div class="carousel-slide" id="slide-english">
+            <span class="lang-label">English</span>
+            <img src="assets/menu-english.png" alt="Bocado Menu — English" loading="eager" />
+          </div>
+          <!-- Arabic Menu -->
+          <div class="carousel-slide" id="slide-arabic">
+            <span class="lang-label">العربية</span>
+            <img src="assets/menu-arabic.png" alt="Bocado Menu — Arabic / قائمة الطعام بالعربية" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Arrow -->
+      <button class="carousel-arrow next" id="nextBtn" aria-label="Next slide">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 6 15 12 9 18"></polyline>
+        </svg>
+      </button>
+    </section>
+
+    <!-- Dots (below carousel) -->
+    <div class="carousel-dots" id="carouselDots">
+      <button class="carousel-dot active" data-slide="0" aria-label="Show English menu"></button>
+      <button class="carousel-dot" data-slide="1" aria-label="Show Arabic menu"></button>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="cta-section">
+      <!-- Location -->
+      <a href="https://maps.app.goo.gl/V1TVxF3eN6gpyyG16?g_st=ic" target="_blank" rel="noopener noreferrer"
+        class="cta-btn btn-location" id="btn-location" aria-label="Find us on Google Maps">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        Our Location
+      </a>
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/966531929170" target="_blank" rel="noopener noreferrer" class="cta-btn btn-whatsapp"
+        id="btn-whatsapp" aria-label="Contact us on WhatsApp">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-divider"></div>
+      <p>&copy; 2026 Bocado. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Zoom Overlay Viewer -->
+  <div class="zoom-overlay" id="zoomOverlay">
+    <button class="zoom-close-btn" id="zoomCloseBtn" aria-label="Close zoom view">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="zoom-level" id="zoomLevel">1.0×</div>
+    <div class="zoom-viewport" id="zoomViewport">
+      <img id="zoomImage" src="" alt="Menu zoom view" />
+    </div>
+    <div class="zoom-hint" id="zoomHint">Pinch to zoom · Double-tap to zoom in</div>
+  </div>
+
+  <script>
+    // ===== CAROUSEL LOGIC =====
+    const track = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dots = document.querySelectorAll('.carousel-dot');
+    let currentSlide = 0;
+    const totalSlides = 2;
+
+    function goToSlide(index) {
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
+      currentSlide = index;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goToSlide(parseInt(dot.dataset.slide));
+      });
+    });
+
+    // Touch / Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const container = document.getElementById('carouselContainer');
+
+    container.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    container.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          goToSlide(currentSlide + 1);
+        } else {
+          goToSlide(currentSlide - 1);
+        }
+      }
+    }, { passive: true });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+      if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    });
+
+    // Auto-slide every 6 seconds
+    let autoSlideInterval = setInterval(() => {
+      goToSlide(currentSlide + 1);
+    }, 6000);
+
+    // Pause auto-slide on hover
+    container.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+    container.addEventListener('mouseleave', () => {
+      autoSlideInterval = setInterval(() => goToSlide(currentSlide + 1), 6000);
+    });
+
+    // ===== ZOOM VIEWER LOGIC =====
+    const zoomOverlay = document.getElementById('zoomOverlay');
+    const zoomCloseBtn = document.getElementById('zoomCloseBtn');
+    const zoomViewport = document.getElementById('zoomViewport');
+    const zoomImage = document.getElementById('zoomImage');
+    const zoomLevelEl = document.getElementById('zoomLevel');
+    const zoomHint = document.getElementById('zoomHint');
+
+    // Zoom state
+    let scale = 1;
+    let posX = 0;
+    let posY = 0;
+    let minScale = 1;
+    let maxScale = 5;
+    let lastTap = 0;
+    let zoomLevelTimeout = null;
+    let hintTimeout = null;
+    let isZoomOpen = false;
+
+    // Pinch state
+    let initialPinchDistance = 0;
+    let initialScale = 1;
+    let isPinching = false;
+
+    // Pan state
+    let isPanning = false;
+    let panStartX = 0;
+    let panStartY = 0;
+    let panStartPosX = 0;
+    let panStartPosY = 0;
+
+    // Open zoom viewer when menu image is tapped
+    document.querySelectorAll('.carousel-slide img').forEach(img => {
+      img.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openZoom(img.src, img.alt);
+      });
+    });
+
+    function openZoom(src, alt) {
+      // Pause auto-slide
+      clearInterval(autoSlideInterval);
+      isZoomOpen = true;
+
+      zoomImage.src = src;
+      zoomImage.alt = alt;
+
+      // Reset zoom state
+      scale = 1;
+      posX = 0;
+      posY = 0;
+
+      zoomOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Wait for image to load, then fit it
+      if (zoomImage.complete) {
+        fitImage();
+      } else {
+        zoomImage.onload = fitImage;
+      }
+
+      // Show hint, hide after 3 seconds
+      zoomHint.classList.remove('hidden');
+      clearTimeout(hintTimeout);
+      hintTimeout = setTimeout(() => zoomHint.classList.add('hidden'), 3000);
+    }
+
+    function fitImage() {
+      const vw = zoomViewport.clientWidth;
+      const vh = zoomViewport.clientHeight;
+      const iw = zoomImage.naturalWidth;
+      const ih = zoomImage.naturalHeight;
+
+      // Calculate scale to fit the image within the viewport
+      minScale = Math.min(vw / iw, vh / ih, 1);
+      scale = minScale;
+
+      // Center the image
+      posX = (vw - iw * scale) / 2;
+      posY = (vh - ih * scale) / 2;
+
+      applyTransform(true);
+    }
+
+    function closeZoom() {
+      zoomOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      isZoomOpen = false;
+
+      // Resume auto-slide
+      autoSlideInterval = setInterval(() => goToSlide(currentSlide + 1), 6000);
+    }
+
+    function applyTransform(smooth) {
+      if (smooth) {
+        zoomImage.classList.add('smooth-transition');
+        setTimeout(() => zoomImage.classList.remove('smooth-transition'), 300);
+      } else {
+        zoomImage.classList.remove('smooth-transition');
+      }
+      zoomImage.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+    }
+
+    function showZoomLevel() {
+      const displayScale = Math.round((scale / minScale) * 10) / 10;
+      zoomLevelEl.textContent = displayScale.toFixed(1) + '×';
+      zoomLevelEl.classList.add('visible');
+      clearTimeout(zoomLevelTimeout);
+      zoomLevelTimeout = setTimeout(() => zoomLevelEl.classList.remove('visible'), 1200);
+    }
+
+    function clampPosition() {
+      const vw = zoomViewport.clientWidth;
+      const vh = zoomViewport.clientHeight;
+      const iw = zoomImage.naturalWidth * scale;
+      const ih = zoomImage.naturalHeight * scale;
+
+      if (iw <= vw) {
+        posX = (vw - iw) / 2;
+      } else {
+        posX = Math.min(0, Math.max(vw - iw, posX));
+      }
+
+      if (ih <= vh) {
+        posY = (vh - ih) / 2;
+      } else {
+        posY = Math.min(0, Math.max(vh - ih, posY));
+      }
+    }
+
+    // Close button
+    zoomCloseBtn.addEventListener('click', closeZoom);
+
+    // Close on backdrop click (only if not zoomed in)
+    zoomOverlay.addEventListener('click', (e) => {
+      if (e.target === zoomOverlay && scale <= minScale * 1.05) {
+        closeZoom();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isZoomOpen) closeZoom();
+    });
+
+    // ===== TOUCH EVENTS FOR ZOOM VIEWPORT =====
+    zoomViewport.addEventListener('touchstart', (e) => {
+      if (!isZoomOpen) return;
+      e.preventDefault();
+
+      if (e.touches.length === 2) {
+        // Pinch start
+        isPinching = true;
+        isPanning = false;
+        initialPinchDistance = getDistance(e.touches[0], e.touches[1]);
+        initialScale = scale;
+      } else if (e.touches.length === 1) {
+        // Check double-tap
+        const now = Date.now();
+        if (now - lastTap < 300) {
+          // Double-tap: toggle zoom
+          handleDoubleTap(e.touches[0]);
+          lastTap = 0;
+          return;
+        }
+        lastTap = now;
+
+        // Start panning
+        if (scale > minScale * 1.05) {
+          isPanning = true;
+          panStartX = e.touches[0].clientX;
+          panStartY = e.touches[0].clientY;
+          panStartPosX = posX;
+          panStartPosY = posY;
+        }
+      }
+    }, { passive: false });
+
+    zoomViewport.addEventListener('touchmove', (e) => {
+      if (!isZoomOpen) return;
+      e.preventDefault();
+
+      if (isPinching && e.touches.length === 2) {
+        const currentDistance = getDistance(e.touches[0], e.touches[1]);
+        const ratio = currentDistance / initialPinchDistance;
+        const newScale = Math.min(maxScale, Math.max(minScale, initialScale * ratio));
+
+        // Zoom toward the midpoint of the two fingers
+        const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+
+        const rect = zoomViewport.getBoundingClientRect();
+        const vpX = midX - rect.left;
+        const vpY = midY - rect.top;
+
+        // Adjust position so the point under the fingers stays put
+        posX = vpX - (vpX - posX) * (newScale / scale);
+        posY = vpY - (vpY - posY) * (newScale / scale);
+        scale = newScale;
+
+        clampPosition();
+        applyTransform(false);
+        showZoomLevel();
+
+      } else if (isPanning && e.touches.length === 1) {
+        const dx = e.touches[0].clientX - panStartX;
+        const dy = e.touches[0].clientY - panStartY;
+        posX = panStartPosX + dx;
+        posY = panStartPosY + dy;
+
+        clampPosition();
+        applyTransform(false);
+      }
+    }, { passive: false });
+
+    zoomViewport.addEventListener('touchend', (e) => {
+      if (e.touches.length < 2) {
+        isPinching = false;
+      }
+      if (e.touches.length === 0) {
+        isPanning = false;
+
+        // Snap back to fit if zoomed out too far
+        if (scale < minScale) {
+          scale = minScale;
+          clampPosition();
+          applyTransform(true);
+        }
+      }
+    }, { passive: true });
+
+    function handleDoubleTap(touch) {
+      const rect = zoomViewport.getBoundingClientRect();
+      const vpX = touch.clientX - rect.left;
+      const vpY = touch.clientY - rect.top;
+
+      if (scale > minScale * 1.05) {
+        // Zoom out to fit
+        scale = minScale;
+        clampPosition();
+        posX = (zoomViewport.clientWidth - zoomImage.naturalWidth * scale) / 2;
+        posY = (zoomViewport.clientHeight - zoomImage.naturalHeight * scale) / 2;
+      } else {
+        // Zoom in to 2.5× centered on the tap point
+        const targetScale = Math.min(maxScale, minScale * 2.5);
+        posX = vpX - (vpX - posX) * (targetScale / scale);
+        posY = vpY - (vpY - posY) * (targetScale / scale);
+        scale = targetScale;
+        clampPosition();
+      }
+
+      applyTransform(true);
+      showZoomLevel();
+    }
+
+    function getDistance(touch1, touch2) {
+      const dx = touch1.clientX - touch2.clientX;
+      const dy = touch1.clientY - touch2.clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    // ===== MOUSE WHEEL ZOOM (for desktop) =====
+    zoomViewport.addEventListener('wheel', (e) => {
+      if (!isZoomOpen) return;
+      e.preventDefault();
+
+      const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
+      const newScale = Math.min(maxScale, Math.max(minScale, scale * zoomFactor));
+
+      const rect = zoomViewport.getBoundingClientRect();
+      const vpX = e.clientX - rect.left;
+      const vpY = e.clientY - rect.top;
+
+      posX = vpX - (vpX - posX) * (newScale / scale);
+      posY = vpY - (vpY - posY) * (newScale / scale);
+      scale = newScale;
+
+      clampPosition();
+      applyTransform(false);
+      showZoomLevel();
+    }, { passive: false });
+
+    // ===== MOUSE DRAG PAN (for desktop) =====
+    let isMousePanning = false;
+    let mousePanStartX = 0;
+    let mousePanStartY = 0;
+    let mousePanStartPosX = 0;
+    let mousePanStartPosY = 0;
+
+    zoomViewport.addEventListener('mousedown', (e) => {
+      if (!isZoomOpen || scale <= minScale * 1.05) return;
+      e.preventDefault();
+      isMousePanning = true;
+      mousePanStartX = e.clientX;
+      mousePanStartY = e.clientY;
+      mousePanStartPosX = posX;
+      mousePanStartPosY = posY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isMousePanning) return;
+      const dx = e.clientX - mousePanStartX;
+      const dy = e.clientY - mousePanStartY;
+      posX = mousePanStartPosX + dx;
+      posY = mousePanStartPosY + dy;
+      clampPosition();
+      applyTransform(false);
+    });
+
+    window.addEventListener('mouseup', () => {
+      isMousePanning = false;
+    });
+
+    // Double-click to zoom on desktop
+    zoomViewport.addEventListener('dblclick', (e) => {
+      if (!isZoomOpen) return;
+      handleDoubleTap({ clientX: e.clientX, clientY: e.clientY });
+    });
+
+    // Handle window resize while zoom is open
+    window.addEventListener('resize', () => {
+      if (isZoomOpen) fitImage();
+    });
+  </script>
+
+</body>
+
+</html>
